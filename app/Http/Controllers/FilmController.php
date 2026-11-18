@@ -130,4 +130,17 @@ class FilmController extends Controller
 
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
     }
+    /**
+     * List films yonger to older
+     */
+    public function listSortFilms()
+    {
+      
+        $title = "Listado de Pelis Nuevas a Antiguas";
+        $films = FilmController::readFilms();
+
+        usort($films, fn($a, $b) => $b['year'] <=> $a['year'] );
+
+        return view('films.list', ["films" => $films, "title" => $title]);
+    }
 }
